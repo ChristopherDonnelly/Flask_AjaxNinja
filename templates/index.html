@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Home</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+        <script type=text/javascript>
+            $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+        </script>
+
+        <script>
+            function submitInfo(color){
+                $.ajax({
+                    url: $SCRIPT_ROOT + '/ninja',
+                    data: JSON.stringify({color: color}),
+                    contentType: 'application/json;charset=UTF-8',
+                    type: 'POST',
+                    success: function(response) {
+                        
+                        var color=response.color;
+                        var ninja=response.ninja;
+                        var message=response.message;
+
+                        $("h1").html(message);
+
+                        $("#ninja_image").attr('src', '/static/images/'+ninja.toLowerCase()+'.jpg')
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            }
+
+            function addNinjaFunctions(){
+
+                $(document).on("click", "button", function(){
+                    var color=$(this).attr('id');
+                    
+                    $(this).addClass('selected');
+                    
+                    submitInfo(color);
+                });
+            }
+
+           $(document).ready(function(){
+                addNinjaFunctions();
+
+                $("form").submit(function(e){
+                    var color=$(this).find('#custColor').val();
+
+                    submitInfo(color);
+                    e.preventDefault();
+                });
+            });
+       </script>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="home_container">
+                <h1>Home</h1>
+                <div id="ninja_container">
+                    <img id="ninja_image" src="{{ url_for('static', filename='images/tmnt.png') }}">
+                </div>
+            </div>
+            <div id="nav">
+                <button id="red">Red</button>
+                <button id="blue">Blue</button>
+                <button id="orange">Orange</button>
+                <button id="purple">Purple</button>
+                <form action='/ninja' name="request" method='post'>
+                    <label for="custColor">Or choose a custom color:</label><br>
+                    <input type="text" name="custColor" id="custColor" />
+                    <input type="submit" value="Submit" />
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

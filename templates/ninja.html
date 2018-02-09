@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <title>Dojos</title>
+       <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="nav">
+                <p>
+                    <a href="\">Home</a> |
+                    {% if not color or color == "home": %}
+                        <em>Ninja</em> |
+                    {% else %}
+                        <a href="\ninja">Ninja</a> |
+                    {% endif %}
+                    {% if color == "blue": %}
+                        <em>Leonardo</em> |
+                    {% else %}
+                        <a href="\ninja\blue">Leonardo</a> |
+                    {% endif %}
+                    {% if color == "orange": %}
+                        <em>Michelangelo</em> |
+                    {% else %}
+                        <a href="\ninja\orange">Michelangelo</a> |
+                    {% endif %}
+                    {% if color == "red": %}
+                        <em>Raphael</em> |
+                    {% else %}
+                        <a href="\ninja\red">Raphael</a> |
+                    {% endif %}
+                    {% if color == "purple": %}
+                        <em>Donatello</em> |
+                    {% else %}
+                        <a href="\ninja\purple">Donatello</a> |
+                    {% endif %}
+                    {% if color and color != "blue" and color != "orange" and color != "red" and color != "purple": %}
+                        <em>Other</em>
+                    {% else %}
+                        <a href="\ninja\other">Other</a>
+                    {% endif %}
+                </p>
+            </div>
+            <div id="turtle_container">                
+                {% if not color or color == "home": %}
+                    <h1>TMNT</h1>
+                    <img src="{{ url_for('static', filename='images/tmnt.png') }}">
+                {% elif color == "blue": %}
+                    <h1>Leonardo</h1>
+                    <img src="{{ url_for('static', filename='images/leonardo.jpg') }}">
+                {% elif color == "orange": %}
+                    <h1>Michelangelo</h1>
+                    <img src="{{ url_for('static', filename='images/michelangelo.jpg') }}">
+                {% elif color == "red": %}
+                    <h1>Raphael</h1>
+                    <img src="{{ url_for('static', filename='images/raphael.jpg') }}">
+                {% elif color == "purple": %}
+                    <h1>Donatello</h1>
+                    <img src="{{ url_for('static', filename='images/donatello.jpg') }}">
+                {% else: %}
+                    <h1>Not April</h1>
+                    <img src="{{ url_for('static', filename='images/notapril.jpg') }}">
+                {% endif %}
+            </div>
+        </div>
+    </body>
+</html>

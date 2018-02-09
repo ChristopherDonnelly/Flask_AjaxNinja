@@ -1,0 +1,47 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#wrapper {
+    width: 970px;
+    margin: 0px auto;
+    padding: 50px;
+}
+
+#nav {
+    text-align: center;
+}
+
+h1, p {
+    padding: 10px;
+}
+
+h1 {
+    padding-bottom: 20px;
+}
+
+img {
+    width: 500px;
+    margin: 10px;
+}
+
+#turtle_container, #home_container {
+    text-align: center;
+}
+
+#turtle_container h1 {
+    margin-top: 50px;
+}
+
+button, input[type="submit"] {
+    cursor: pointer;
+    width: 75px;
+    margin: 5px;
+    padding: 5px;
+}
+
+form {
+    margin-top: 20px;
+}
